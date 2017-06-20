@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sudo apt-get install -y qemu-kvm libvirt-bin bridge-utils virt-manager
+
+echo -n "please enter the path and the name of disk that will be created EX: ./cent.vm : "
+read x
+
+echo -n "please enter the location of your iso EX: ./centos.iso: "
+read y
+
+
+sudo virt-install --name centos7 \
+--ram 1024 \
+--disk path=$x,size=8 \
+--vcpus=1 \
+--os-type=linux \
+--os-variant=CentOS7.0 \
+--network=bridge:virbr0 \
+--console=pty,target_type=serial \
+--location=$y
